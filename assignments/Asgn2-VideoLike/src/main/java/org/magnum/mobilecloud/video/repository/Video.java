@@ -1,5 +1,14 @@
 package org.magnum.mobilecloud.video.repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.google.common.base.Objects;
 
 /**
@@ -16,8 +25,11 @@ import com.google.common.base.Objects;
  * 
  * @author mitchell
  */
+@Entity
 public class Video {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	private String name;
@@ -25,6 +37,14 @@ public class Video {
 	private long duration;
 	private long likes;
 	
+	@ElementCollection
+	private List<String> usersLiked = new ArrayList<String>();
+
+	@ElementCollection
+	private List<String> usersUnliked = new ArrayList<String>();
+	
+
+
 	public Video() {
 	}
 
@@ -75,6 +95,28 @@ public class Video {
 	public void setLikes(long likes) {
 		this.likes = likes;
 	}
+
+	
+	
+	public List<String> getUsersLiked() {
+		return usersLiked;
+	}
+
+	public void setUsersLiked(List<String> usersLiked) {
+		this.usersLiked = usersLiked;
+	}
+	
+
+	
+	
+	public List<String> getUsersUnliked() {
+		return usersUnliked;
+	}
+
+	public void setUsersUnliked(List<String> usersUnliked) {
+		this.usersUnliked = usersUnliked;
+	}
+	
 	
 	/**
 	 * Two Videos will generate the same hashcode if they have exactly the same
